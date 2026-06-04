@@ -1,0 +1,269 @@
+:root {
+  --page-bg: #f3f5f7;
+  --paper: #ffffff;
+  --ink: #20242a;
+  --muted: #68717d;
+  --line: #d8dde3;
+  --line-soft: #ebeff3;
+  --accent: #2f6f9f;
+  --accent-soft: #e8f2f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--page-bg);
+  font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.memo-page {
+  width: min(920px, calc(100% - 32px));
+  min-height: 1120px;
+  margin: 32px auto;
+  padding: 48px 56px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 45px rgba(23, 37, 50, 0.08);
+}
+
+.memo-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.memo-number {
+  min-width: 132px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  text-align: right;
+}
+
+.memo-number span,
+.memo-number strong {
+  display: block;
+}
+
+.memo-number span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.memo-number strong {
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+label span,
+.section-heading span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+input,
+select {
+  height: 44px;
+  padding: 8px 12px;
+}
+
+textarea {
+  min-height: 116px;
+  padding: 14px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+[contenteditable="true"]:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.memo-section {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.task-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-list li {
+  display: grid;
+  grid-template-columns: 24px 1fr minmax(96px, 140px);
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+}
+
+.task-list input {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+}
+
+.task-list span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-list em {
+  color: var(--muted);
+  font-style: normal;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.large-note {
+  min-height: 220px;
+}
+
+.memo-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding-top: 28px;
+}
+
+::placeholder {
+  color: #9aa2ad;
+}
+
+@media (max-width: 680px) {
+  .memo-page {
+    width: min(100% - 20px, 920px);
+    min-height: auto;
+    margin: 10px auto;
+    padding: 28px 20px;
+  }
+
+  .memo-header,
+  .section-heading {
+    display: grid;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .memo-number {
+    width: 100%;
+    text-align: left;
+  }
+
+  .meta-grid,
+  .memo-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .task-list li {
+    grid-template-columns: 24px 1fr;
+  }
+
+  .task-list em {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .memo-page {
+    width: 100%;
+    min-height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  input,
+  select,
+  textarea {
+    border-color: #bfc6cf;
+  }
+}
