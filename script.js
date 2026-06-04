@@ -2,6 +2,8 @@ const storageKey = "no-forget-tasks";
 const taskList = document.querySelector("#task-list");
 const emptyState = document.querySelector("#empty-state");
 const taskCount = document.querySelector("#task-count");
+const newTaskSection = document.querySelector(".new-task");
+const toggleTaskFormButton = document.querySelector("#toggle-task-form");
 const form = document.querySelector("#task-form");
 const titleInput = document.querySelector("#task-title");
 const detailInput = document.querySelector("#task-detail");
@@ -16,6 +18,19 @@ archiveOldCompletedTasks();
 saveTasks();
 renderTasks();
 setDefaultDeadline();
+
+toggleTaskFormButton.addEventListener("click", () => {
+  const isExpanding = form.hidden;
+
+  form.hidden = !isExpanding;
+  newTaskSection.classList.toggle("is-collapsed", !isExpanding);
+  toggleTaskFormButton.textContent = isExpanding ? "收起" : "展开";
+  toggleTaskFormButton.setAttribute("aria-expanded", String(isExpanding));
+
+  if (isExpanding) {
+    titleInput.focus();
+  }
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -37,6 +52,7 @@ form.addEventListener("submit", (event) => {
   renderTasks();
   form.reset();
   setDefaultDeadline();
+  collapseTaskForm();
 });
 
 function loadTasks() {
@@ -250,4 +266,11 @@ function createId() {
   }
 
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function collapseTaskForm() {
+  form.hidden = true;
+  newTaskSection.classList.add("is-collapsed");
+  toggleTaskFormButton.textContent = "展开";
+  toggleTaskFormButton.setAttribute("aria-expanded", "false");
 }

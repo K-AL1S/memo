@@ -15,7 +15,7 @@
       </div>
       <div class="header-actions">
         <p class="header-note">先看已经写过的事项，再补充新的安排。</p>
-        <a class="nav-button" href="completed.html">已完成</a>
+        <a class="nav-button completed-nav-button" href="completed.html">已完成</a>
       </div>
     </header>
 
@@ -28,12 +28,12 @@
       <p class="empty-state" id="empty-state">还没有记录事项，先在下面新增一个。</p>
     </section>
 
-    <section class="new-task" aria-labelledby="new-title">
+    <section class="new-task is-collapsed" aria-labelledby="new-title">
       <div class="section-heading">
         <h2 id="new-title">新增事项</h2>
-        <span>New Task</span>
+        <button class="toggle-form-button" id="toggle-task-form" type="button" aria-expanded="false" aria-controls="task-form">展开</button>
       </div>
-      <form id="task-form">
+      <form id="task-form" hidden>
         <label>
           <span>标题</span>
           <input id="task-title" type="text" required maxlength="40" placeholder="例如：整理项目资料">
