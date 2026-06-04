@@ -18,6 +18,16 @@ dist/
 build/
 .cache/
 
+# Android and Gradle generated files
+.gradle/
+**/.gradle/
+**/build/
+local.properties
+
+# Local SDKs, downloaded tools, and archives
+tools/
+*.zip
+
 # Environment files
 .env
 .env.*

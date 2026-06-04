@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>已完成事项</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="memo-page" aria-label="已完成事项">
+    <header class="memo-header">
+      <div>
+        <p class="eyebrow">NO FORGET</p>
+        <h1>已完成</h1>
+      </div>
+      <div class="header-actions">
+        <p class="header-note">这里保存已完成并归档的事项。</p>
+        <a class="nav-button" href="memo.html">返回任务</a>
+      </div>
+    </header>
+
+    <section class="task-board" aria-labelledby="completed-title">
+      <div class="section-heading">
+        <h2 id="completed-title">归档完成项</h2>
+        <span id="completed-count">0 项</span>
+      </div>
+      <div class="completed-list" id="completed-list" aria-live="polite"></div>
+      <p class="empty-state" id="completed-empty">还没有归档完成项。</p>
+    </section>
+  </main>
+
+  <template id="completed-template">
+    <article class="task-card completed-card">
+      <div class="task-content">
+        <h3></h3>
+        <p></p>
+      </div>
+      <div class="task-meta completed-meta">
+        <time class="completed-at"></time>
+        <time class="archived-at"></time>
+        <time class="deadline-at"></time>
+      </div>
+    </article>
+  </template>
+
+  <script src="completed.js"></script>
+</body>
+</html>

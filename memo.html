@@ -3,100 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>备忘录</title>
+  <title>任务备忘录</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="memo-page" aria-label="备忘录模板">
+  <main class="memo-page" aria-label="任务备忘录">
     <header class="memo-header">
       <div>
-        <p class="eyebrow">MEMORANDUM</p>
-        <h1 contenteditable="true">备忘录标题</h1>
+        <p class="eyebrow">NO FORGET</p>
+        <h1>我的任务</h1>
       </div>
-      <div class="memo-number">
-        <span>编号</span>
-        <strong contenteditable="true">M-0001</strong>
+      <div class="header-actions">
+        <p class="header-note">先看已经写过的事项，再补充新的安排。</p>
+        <a class="nav-button" href="completed.html">已完成</a>
       </div>
     </header>
 
-    <section class="meta-grid" aria-label="基础信息">
-      <label>
-        <span>日期</span>
-        <input type="date" aria-label="日期">
-      </label>
-      <label>
-        <span>负责人</span>
-        <input type="text" aria-label="负责人" placeholder="请输入姓名">
-      </label>
-      <label>
-        <span>事项类别</span>
-        <input type="text" aria-label="事项类别" placeholder="例如：会议 / 项目 / 日常">
-      </label>
-      <label>
-        <span>优先级</span>
-        <select aria-label="优先级">
-          <option>普通</option>
-          <option>重要</option>
-          <option>紧急</option>
-        </select>
-      </label>
-    </section>
-
-    <section class="memo-section">
+    <section class="task-board" aria-labelledby="saved-title">
       <div class="section-heading">
-        <h2>重点提醒</h2>
-        <span>Key Notes</span>
+        <h2 id="saved-title">已记录事项</h2>
+        <span id="task-count">0 项</span>
       </div>
-      <textarea aria-label="重点提醒" placeholder="记录最需要关注的事项、时间节点或关键结论。"></textarea>
+      <div class="task-list" id="task-list" aria-live="polite"></div>
+      <p class="empty-state" id="empty-state">还没有记录事项，先在下面新增一个。</p>
     </section>
 
-    <section class="memo-section">
+    <section class="new-task" aria-labelledby="new-title">
       <div class="section-heading">
-        <h2>待办清单</h2>
-        <span>To-do List</span>
+        <h2 id="new-title">新增事项</h2>
+        <span>New Task</span>
       </div>
-      <ul class="task-list" aria-label="待办清单">
-        <li>
-          <input type="checkbox" aria-label="待办事项一">
-          <span contenteditable="true">待办事项一</span>
-          <em contenteditable="true">截止日期</em>
-        </li>
-        <li>
-          <input type="checkbox" aria-label="待办事项二">
-          <span contenteditable="true">待办事项二</span>
-          <em contenteditable="true">截止日期</em>
-        </li>
-        <li>
-          <input type="checkbox" aria-label="待办事项三">
-          <span contenteditable="true">待办事项三</span>
-          <em contenteditable="true">截止日期</em>
-        </li>
-        <li>
-          <input type="checkbox" aria-label="待办事项四">
-          <span contenteditable="true">待办事项四</span>
-          <em contenteditable="true">截止日期</em>
-        </li>
-      </ul>
+      <form id="task-form">
+        <label>
+          <span>标题</span>
+          <input id="task-title" type="text" required maxlength="40" placeholder="例如：整理项目资料">
+        </label>
+        <label>
+          <span>具体信息</span>
+          <textarea id="task-detail" required maxlength="240" placeholder="写清楚要做什么、需要注意什么。"></textarea>
+        </label>
+        <div class="form-row">
+          <label>
+            <span>截止日期</span>
+            <input id="task-date" type="date" required>
+          </label>
+          <label>
+            <span>截止时间</span>
+            <input id="task-time" type="time" required>
+          </label>
+        </div>
+        <label class="check-field">
+          <input id="task-urgent" type="checkbox">
+          <span>紧急</span>
+        </label>
+        <button type="submit">新增事项</button>
+      </form>
     </section>
-
-    <section class="memo-section">
-      <div class="section-heading">
-        <h2>详细备注</h2>
-        <span>Details</span>
-      </div>
-      <textarea class="large-note" aria-label="详细备注" placeholder="补充背景信息、沟通记录、决定事项或后续安排。"></textarea>
-    </section>
-
-    <footer class="memo-footer">
-      <label>
-        <span>签名</span>
-        <input type="text" aria-label="签名" placeholder="签名">
-      </label>
-      <label>
-        <span>更新时间</span>
-        <input type="text" aria-label="更新时间" placeholder="YYYY-MM-DD HH:MM">
-      </label>
-    </footer>
   </main>
+
+  <template id="task-template">
+    <article class="task-card">
+      <div class="task-content">
+        <div>
+          <h3></h3>
+          <p></p>
+        </div>
+        <label class="check-field task-urgent-field">
+          <input class="urgent-input" type="checkbox">
+          <span>紧急</span>
+        </label>
+      </div>
+      <div class="task-meta">
+        <label>
+          <span>完成进度</span>
+          <input class="progress-input" type="range" min="0" max="100" step="5">
+        </label>
+        <strong class="progress-value"></strong>
+        <time></time>
+        <em class="days-left"></em>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
 </body>
 </html>

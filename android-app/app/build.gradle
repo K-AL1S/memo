@@ -1,0 +1,41 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.example.noforget"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.noforget"
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+def generatedWebAssets = layout.buildDirectory.dir("generated/assets/web")
+
+tasks.register("syncWebAssets", Copy) {
+    from(rootProject.projectDir.parentFile) {
+        include "memo.html"
+        include "completed.html"
+        include "styles.css"
+        include "script.js"
+        include "completed.js"
+    }
+    into(generatedWebAssets)
+}
+
+android {
+    sourceSets {
+        main {
+            assets.srcDir(generatedWebAssets)
+        }
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn("syncWebAssets")
+}
